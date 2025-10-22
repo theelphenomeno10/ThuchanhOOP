@@ -6,7 +6,7 @@ using namespace std;
 class SoNguyenLon
 {
 private:
-    char *snl = nullptr;
+    char *_snl = nullptr;
 
 public:
     SoNguyenLon();
@@ -20,35 +20,70 @@ public:
 
 SoNguyenLon::SoNguyenLon()
 {
-    snl = new char[2];
-    strcpy_s(snl, 2, "0");
+    _snl = new char[2];
+    strcpy_s(_snl, 2, "0");
 }
 
 SoNguyenLon::SoNguyenLon(const char *s)
 {
     int doDai = strlen(s);
-    snl = new char[doDai + 1];
-    strcpy_s(snl, doDai + 1, s);
+    _snl = new char[doDai + 1];
+    strcpy_s(_snl, doDai + 1, s);
 }
 
 SoNguyenLon::SoNguyenLon(const int &so, const int &lanLap)
 {
-    snl = new char[lanLap + 1];
+    _snl = new char[lanLap + 1];
     for (int i = 0; i < lanLap; i++)
     {
-        snl[i] = '0' + so;
+        _snl[i] = '0' + so;
     }
-    snl[lanLap] = '\0';
+    _snl[lanLap] = '\0';
 }
 
-SoNguyenLon SoNguyenLon::Tru(const SoNguyenLon &snl)
+SoNguyenLon SoNguyenLon::Tru(const SoNguyenLon &s)
 {
-    int soBiTru = 0, soTru = 0;
+    char *soBiTru;
+    char *soTru;
+
+    int doDai1 = 0, doDai2 = 0;
+    bool isNegative = strcmp(s._snl, _snl) == -1;
+    if (isNegative)
+    {
+        doDai1 = strlen(s._snl);
+        doDai2 = strlen(_snl);
+
+        soBiTru = new char[doDai1 + 1];
+        soTru = new char[doDai2 + 1];
+
+        strcpy_s(soBiTru, doDai1 + 1, s._snl);
+        strcpy_s(soTru, doDai2 + 1, _snl);
+    }
+    else
+    {
+        doDai1 = strlen(_snl);
+        doDai2 = strlen(s._snl);
+
+        soBiTru = new char[doDai1 + 1];
+        soBiTru = new char[doDai2 + 1];
+
+        strcpy_s(soBiTru, doDai1 + 1, _snl);
+        strcpy_s(soTru, doDai2 + 1, s._snl);
+    }
+
+    int i1 = doDai1, i2 = doDai2;
+    int carry = 0, a, b, k = 0;
+    char *res = new char[doDai1 + 2];
+    while (carry > 0 || i1 > 0 || i2 > 0)
+    {
+        a = soBiTru[i1] - '0';
+        b = i2 < 0 ? 0 : soTru[i2] - '0';
+    }
 }
 
 void SoNguyenLon::In(ostream &os)
 {
-    os << snl;
+    os << _snl;
 }
 
 int main()
